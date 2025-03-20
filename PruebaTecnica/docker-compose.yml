@@ -1,0 +1,26 @@
+services:
+  app1:
+    build:
+      context: .  # Directorio del Dockerfile
+    ports:
+      - "5000:80"  # Mapea el puerto 80 del contenedor al puerto 5000 del host
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - APP_INSTANCE=1 # Variable de entorno para identificar la instancia (opcional)
+    networks:
+      - mynetwork
+
+  app2:
+    build:
+      context: .  # Directorio del Dockerfile
+    ports:
+      - "5001:80"  # Mapea el puerto 80 del contenedor al puerto 5001 del host
+    environment:
+      - ASPNETCORE_URLS=http://+:80
+      - APP_INSTANCE=2 # Variable de entorno para identificar la instancia (opcional)
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

@@ -24,25 +24,25 @@ namespace PruebaTecnica.Controllers
         }
         // GET: api/<TestController>
         [HttpGet]
-        public async Task<TestResponse> Get()
+        public async Task<TestResponse> Get(int DurationCache)
         {
             //
             string json;
+            string origin = "redis";
             var watch = Stopwatch.StartNew();
             var keyName = "countries";
             json = await _redis.StringGetAsync(keyName);
 
             if (string.IsNullOrEmpty(json))
             {
-
+                origin = "api";
                 HttpResponseMessage response = await _client.GetAsync($"https://restcountries.com/v3.1/region/america");
                 if (response.IsSuccessStatusCode)
                 {
                     json = await response.Content.ReadAsStringAsync();
                 }
-                
                 var setTask = _redis.StringSetAsync(keyName, json);
-                var expireTask = _redis.KeyExpireAsync(keyName, TimeSpan.FromSeconds(3600));
+                var expireTask = _redis.KeyExpireAsync(keyName, TimeSpan.FromSeconds(DurationCache));
                 await Task.WhenAll(setTask, expireTask);
             }
 
@@ -88,9 +88,15 @@ namespace PruebaTecnica.Controllers
                 }
             }
             var result = new TestResponse();
+            result.Origin = origin;
             result.ElapsedTime = watch.ElapsedMilliseconds;
             result.Forecasts = countries;
             return result;
+        }
+        [HttpPost("CleanCache")]
+        public async Task CleanCache()
+        {
+            await _redis.KeyDeleteAsync("countries");
         }
 
         public class CountryResponse()
@@ -102,6 +108,7 @@ namespace PruebaTecnica.Controllers
         }
         public class TestResponse()
         {
+            public string Origin { get; set; }
             public long ElapsedTime { get; set; }
             public IEnumerable<CountryResponse> Forecasts { get; set; }
         }

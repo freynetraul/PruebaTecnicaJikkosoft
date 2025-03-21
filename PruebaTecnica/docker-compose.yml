@@ -7,6 +7,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:80
       - APP_INSTANCE=1 # Variable de entorno para identificar la instancia (opcional)
+      - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - mynetwork
 
@@ -18,6 +19,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://+:80
       - APP_INSTANCE=2 # Variable de entorno para identificar la instancia (opcional)
+      - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - mynetwork
 

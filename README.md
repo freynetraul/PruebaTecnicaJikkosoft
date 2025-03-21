@@ -12,8 +12,8 @@ Este proyecto implementa una API simple que consume datos de países y los almac
 1.  **Clonar el repositorio:**
 
     ```bash
-    git clone [URL del repositorio]
-    cd [nombre del directorio del repositorio]
+    git clone https://github.com/freynetraul/PruebaTecnicaJikkosoft.git
+    cd PruebaTecnicaJikkosoft/PruebaTecnica
     ```
 
 2.  **Ejecutar la aplicación con Docker Compose:**

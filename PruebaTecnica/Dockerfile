@@ -1,19 +1,19 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+# Use .NET 8 SDK to build the application
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+# Set the working directory
 WORKDIR /app
-EXPOSE 80
-
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
-WORKDIR /src
-COPY ["PruebaTecnica.csproj", "./"]  # Cambia "PruebaTecnica.csproj" por el nombre real de tu archivo .csproj
-RUN dotnet restore "./PruebaTecnica.csproj"
+# Copy the project files
 COPY . .
-WORKDIR "/src/."
-RUN dotnet build "PruebaTecnica.csproj" -c Release -o /app/build
-
-FROM build AS publish
-RUN dotnet publish "PruebaTecnica.csproj" -c Release -o /app/publish
-
-FROM base AS final
+# Restore and build the project
+RUN dotnet restore
+RUN dotnet publish -c Release -o out
+# Final stage: run the application using the ASP.NET Core runtime
+FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
-COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "PruebaTecnica.dll"] # Cambia "PruebaTecnica.dll" por el nombre real de tu .dll
+COPY --from=build /app/out .
+# Expose port 80 for the application
+EXPOSE 80
+# Set the application to listen on IPv4 only
+ENV ASPNETCORE_URLS=http://0.0.0.0:80
+# Run the application
+ENTRYPOINT ["dotnet", "PruebaTecnica.dll"]

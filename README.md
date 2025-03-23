@@ -24,6 +24,8 @@ Este proyecto implementa una API simple que consume datos de países y los almac
 
     Este comando levantará dos instancias de la aplicación en segundo plano.
 
+Redirigete a [DireccionUrlInstancia1]//swagger/index.html
+y [DireccionUrlInstancia2]//swagger/index.html
 
 Tienes dos endpoints:
 

@@ -19,7 +19,6 @@ namespace PruebaTecnica.Controllers
         public TestController(HttpClient client, IConnectionMultiplexer muxer)
         {
             _client = client;
-            _client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("weatherCachingApp", "1.0"));
             _redis = muxer.GetDatabase();
         }
         // GET: api/<TestController>

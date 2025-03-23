@@ -24,8 +24,15 @@ Este proyecto implementa una API simple que consume datos de países y los almac
 
     Este comando levantará dos instancias de la aplicación en segundo plano.
 
-Redirigete a [DireccionUrlInstancia1]//swagger/index.html
-y [DireccionUrlInstancia2]//swagger/index.html
+Redirigete a 
+  ```bash
+[UrlUrlInstancia1]//swagger/index.html
+  ```
+y 
+  ```bash
+[UrlInstancia2]//swagger/index.html
+  ```
+
 
 Tienes dos endpoints:
 
@@ -34,5 +41,11 @@ Tienes dos endpoints:
 El primero le permite consumir un API de paises, como queryparam se tiene la cantidad de segundos deseado en los cuales se desea que esta guardado los datos en cache (en caso de que sea por primera vez o el cache este invalidado)
 
 El segundo endpoint le permite invalidar ese cache para que pruebe de nuevo a consumir la API, el response del primer endpoint te da datos como el origen del cual obtuvo los datos y el tiempo que se tardó en consumir estos datos
+
+Si prefieres puedes ejecutar directamente el endpoint en el navegador o postman asi:
+
+  ```bash
+[UrlInstancia]/api/Test?DurationCache=[TiempoEnSegundosDuraccionCache]
+  ```
 
   

@@ -24,17 +24,17 @@ Este proyecto implementa una API simple que consume datos de países y los almac
 
     Este comando levantará dos instancias de la aplicación en segundo plano.
 
-Redirigete a 
-  ```bash
-[UrlUrlInstancia1]//swagger/index.html
-  ```
-y 
-  ```bash
-[UrlInstancia2]//swagger/index.html
-  ```
+3.  Redirigete a 
+      ```bash
+     [UrlUrlInstancia1]//swagger/index.html
+      ```
+    y 
+      ```bash
+    [UrlInstancia2]//swagger/index.html
+      ```
 
 
-Tienes dos endpoints:
+A continuación, tienes dos endpoints:
 
 ![image](https://github.com/user-attachments/assets/7a0b276d-6c42-4b9a-ae75-7807a20a3b92)
 
